@@ -41,6 +41,16 @@ app.get("/allHoldings", async (req, res) => {
   
     res.send("Order saved!");
   });
+
+  app.get("/orders", async (req, res) => {
+    try {
+      const orders = await db.collection("orders").find().toArray(); // adapt to your DB
+      res.json(orders);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch orders" });
+    }
+  });
+  
   
 
 app.listen(5000, ()=>{
